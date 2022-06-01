@@ -1,0 +1,19 @@
+/*Css reset*/
+
+* {
+  margin:  0;
+  padding:  0;
+  box-sizing: border-box;
+}
+
+.cardHighlight {
+  min-height:  100%;
+}
+
+body {
+ background-image: url("../public/coffee2.avif");
+ background-color: #cccccc;
+ background-position: right;
+ background-repeat: no-repeat;
+ background-attachment: fixed;
+}
