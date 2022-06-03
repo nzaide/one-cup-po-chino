@@ -17,7 +17,7 @@ import { BiAdjust } from "react-icons/bi";
 
 //react-router
 //BrowserRouter as Router(alternative)
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, NavLink, Switch} from 'react-router-dom';
 
 
 //<>..</> (Fragment) needs to add if we added multiple components/html tags
@@ -39,17 +39,16 @@ function App() {
   return (
     <UserProvider value = {{ user, setUser, unsetUser }} >
         <BrowserRouter>
-        
             <AppNavbar />
             <Container>
                 <Routes>
-                    <Route path="/" element={ <Home /> } />
-                    <Route path="/products" element={ <ProductsPage /> }/>
-                    <Route path="/register" element={ <Register /> }/>
-                    <Route path="/login" element={ <Login /> }/>
-                    <Route path="/logout" element={ <Logout /> }/>
-                    <Route path="/products/findproduct/:productId" element={ <SpecificProduct /> }/>
-                    <Route path="*" element={ <PageNotFound /> } />
+                        <Route path="/" element={ <Home /> } />
+                        <Route path="/products" element={ <ProductsPage /> }/>
+                        <Route path="/register" element={ <Register /> }/>
+                        <Route path="/login" element={ <Login /> }/>
+                        <Route path="/logout" element={ <Logout /> }/>
+                        <Route path="/products/findproduct/:productId" element={ <SpecificProduct /> }/>
+                        <Route path="*" element={ <PageNotFound /> } />
                 </Routes>
             </Container>
 

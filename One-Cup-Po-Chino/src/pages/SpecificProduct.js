@@ -1,11 +1,10 @@
 
 import { useState, useContext, useEffect } from 'react';
-import { Container, Card, Button } from 'react-bootstrap';
+import { Container, Card, Button, Form, FormControl } from 'react-bootstrap';
 import UserContext from '../UserContext';
 import Swal from 'sweetalert2';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-//useParams() contains any values we are trying to pass in the URL stored
-//useParams is how we receive the productId passed via the URL
+import "../App.css";
 
 export default function SpecificProduct() {
 
@@ -16,7 +15,8 @@ export default function SpecificProduct() {
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
 	const [price, setPrice] = useState(0);
-
+	const [quantity, setQuantity] = useState(0);
+	const [subTotal, setSubTotal] = useState(0);
 
 	useEffect(() => {
 
@@ -28,9 +28,26 @@ export default function SpecificProduct() {
 			setPrice(data.price)
 		})
 
-	}, [])
+		setSubTotal(quantity * price)
+
+	}, [subTotal, quantity])
 
 	const { user } = useContext(UserContext);
+
+	function decrementQuantity () {
+		setQuantity(prevQuantity => prevQuantity - 1)
+		setSubTotal(setSubTotal => quantity * price)
+		if(quantity === 0) {
+			setQuantity(0)
+			setSubTotal(0)
+		}
+
+	}
+
+	function incrementQuantity () {
+		setQuantity(prevQuantity => prevQuantity + 1)
+		setSubTotal(setSubTotal => quantity * price)
+	}
 
 
 	//enroll function
@@ -43,7 +60,8 @@ export default function SpecificProduct() {
 				Authorization: `Bearer ${ localStorage.getItem('accessToken') }`
 			},
 			body: JSON.stringify({
-				productId: productId
+				productId: productId,
+				quantity: quantity
 			})
 		})
 		.then(res => res.json())
@@ -77,12 +95,19 @@ export default function SpecificProduct() {
 
 				<Card.Body>
 					<Card.Text>{ description }</Card.Text>
-					<h6>Price: Php { price } </h6>
+					<h6>Price:  <span>&#8369;</span> { price } </h6>
+					<h6>
+							 <Button variant="dark" onClick={decrementQuantity}> - </Button>
+							 <span> {` ${quantity} `} </span>
+						<Button variant="dark" onClick={incrementQuantity}> + </Button> 
+					</h6>
+
+					<h6>Subtotal: <span>&#8369;</span> {subTotal} </h6>
 				</Card.Body>
 
 				<Card.Footer>
 				{ user.accessToken !== null ?
-					<Button variant="dark" onClick={() => enroll(productId)}>Buy Now</Button>
+					<Button variant="dark" onClick={() => enroll(productId)}>Add to Cart</Button>
 					:
 					<Button variant="dark" as={ Link } to="/login">Login to Purchase</Button>
 				 }

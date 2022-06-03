@@ -1,10 +1,11 @@
 import { Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 
-export default function ProductStatus({ product, isActive, fetchData}) {
+export default function ProductStatus({ specificProductStatus, isActive, fetchData}) {
 
 	const archiveToggle = (productId) => {
-		fetch(`http://localhost:4000/products/${ productId }/archive`,{
+		console.log(productId)
+		fetch(`http://localhost:4000/products/archive/${ productId }`,{
 			method: 'PUT',
 			headers: {
 				Authorization: `Bearer ${ localStorage.getItem('accessToken')}`
@@ -32,7 +33,8 @@ export default function ProductStatus({ product, isActive, fetchData}) {
 
 	//for activating the product
 	const activateToggle = (productId) => {
-		fetch(`http://localhost:4000/products/${ productId }/activate`, {
+		console.log(productId)
+		fetch(`http://localhost:4000/products/activate/${ productId }`, {
 			method: 'PUT',
 			headers: {
 				Authorization: `Bearer ${ localStorage.getItem('accessToken')}`
@@ -63,11 +65,11 @@ export default function ProductStatus({ product, isActive, fetchData}) {
 		<>
 
 			{isActive  ?
-				<Button variant="danger" size="sm" onClick={() => archiveToggle(product)}>Disable</Button>
+				<Button variant="danger" size="sm" onClick={() => archiveToggle(specificProductStatus)}>Archive</Button>
 
 				:
 
-				<Button variant="success" size="sm" onClick={() => activateToggle(product)}>Enable</Button>
+				<Button variant="success" size="sm" onClick={() => activateToggle(specificProductStatus)}>Activate</Button>
 
 			}
 			

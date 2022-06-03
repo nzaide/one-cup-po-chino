@@ -12,79 +12,88 @@ export default function Register() {
 
 	const navigate = useNavigate();
 
-	//state hooks to store the values of the input fields
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
 	const [ verifyPassword, setVerifyPassword ] = useState('');
-	
-	//state for the enable/disable button
+	const [ passwordStatus, setPasswordStatus ] = useState('');
 	const [ isButtonActive, setButtonActive ] = useState(true);
 
 	useEffect(() => {
-		//Validation to enable submit button
-		if((email !== '' && password !== '' && verifyPassword !== '') && (password === verifyPassword)){
-			setButtonActive(true);
+
+		if(email !== '' && password !== '' && verifyPassword !== ''){
+			if (password !== verifyPassword) {
+				setPasswordStatus("Password does not match!");
+				setButtonActive(false);
+			} else {
+				setPasswordStatus("Password match!");
+				setButtonActive(true);
+			}
+
 		}else {
 			setButtonActive(false);
 		}
-	}, [email, password, verifyPassword])
+	}, [email, password, verifyPassword, passwordStatus])
 
 
 	function registerUser(e) {
 		e.preventDefault();
 
-		fetch(`http://localhost:4000/users/allusers`)
-		.then(res => res.json())
-		.then(data => {
-			
-
-		})
-
-		fetch('http://localhost:4000/users/register', {
-			method: 'POST',
-			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify({
-				email: email,
-				password: password
+			fetch('http://localhost:4000/users/register', {
+				method: 'POST',
+				headers: {'Content-Type': 'application/json'},
+				body: JSON.stringify({
+					email: email,
+					password: password
+				})
 			})
-		})
-		.then(res => res.json())
-		.then(data => {
-			console.log(data)
+			.then(res => res.json())
+			.then(data => {
+				console.log(data.message)
 
-			if(data){
-				Swal.fire({
-				  title: 'Registration Successful! You may now Login.',
-				  width: 600,
-				  padding: '3em',
-				  color: '#716add',
-				  background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
-				  backdrop: `
-				    rgba(0,0,123,0.4)
-				    url("https://sweetalert2.github.io/images/nyan-cat.gif")
-				    left top
-				    no-repeat
-				  `
-				})
+				if(data){
 
-				navigate('/login')
+					if(data.message === `Email already existed. Do you wish to login?`) {
+						Swal.fire({
+						title: 'error',
+						icon: 'error',
+						text: 'Email already existed. Do you wish to login?'
+						})
 
-			}else {
-				Swal.fire({
-					title: 'error',
-					icon: 'error',
-					text: 'Please try again'
-				})
-			}
+					} else {
+						Swal.fire({
+						  title: 'Registration Successful! You may now Login.',
+						  width: 600,
+						  padding: '3em',
+						  color: '#716add',
+						  background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
+						  backdrop: `
+						    rgba(0,0,123,0.4)
+						    url("https://sweetalert2.github.io/images/nyan-cat.gif")
+						    left top
+						    no-repeat
+						  `
+						})
+						navigate('/login')
+					}
 
-		})
+				} 
+				else {
+					Swal.fire({
+						title: 'error',
+						icon: 'error',
+						text: 'Please try again'
+					})
+				}
+
+			})
 
 	}
 
 
+
 	return(
 
-		<div className="container w-50">
+		<div className="container w-100">
 		<div className="justify-content-center align-items-center">
 			<Form onSubmit={e => registerUser(e)}>
 			    <h1>{`ℝ𝕖𝕘𝕚𝕤𝕥𝕖𝕣`}</h1>
@@ -123,10 +132,17 @@ export default function Register() {
 					    onChange={e => setVerifyPassword(e.target.value)}
 					    />
 				</Form.Group>
+				{passwordStatus === "Password match!" ?
+					<p class="text-success"><strong>{passwordStatus}</strong></p>
+					:
+					<p class="text-danger"><strong>{passwordStatus}</strong></p>
+				}
+
+				
 				{isButtonActive ?
 					<Button variant="dark" type="submit" className="mt-3">Submit</Button>
 					:
-					<Button variant="muted" type="submit" className="mt-3" disabled>Submit</Button>
+					<Button variant="dark" type="submit" className="mt-3" disabled>Submit</Button>
 				}
 				
 			</Form>

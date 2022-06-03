@@ -114,8 +114,8 @@ export default function Login() {
 		<Navigate to="/products" />
 
 		:
-		<div className="container w-50">
-		<div className="justify-content-center align-items-center">
+		<div className="container w-100">
+		<div className="d-flex justify-content-center align-items-center">
 		<Form className="w-100 " onSubmit={e => authentication(e)}>
             <h1>{`𝕃𝕠𝕘𝕚𝕟`}</h1>
 			<Form.Group>
