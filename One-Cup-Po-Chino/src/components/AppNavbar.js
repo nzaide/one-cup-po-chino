@@ -37,7 +37,7 @@ export default function AppNavbar() {
 					<Nav.Link as={Link} to="/"><h5>{`𝗛𝗼𝗺𝗲`}     <AiOutlineHome /></h5></Nav.Link>
 					<Nav.Link as={Link} to="/products"><h5>{`𝗣𝗿𝗼𝗱𝘂𝗰𝘁𝘀`}   <SiBuymeacoffee /></h5></Nav.Link>
 
-{/*					{(user.isAdmin === true)
+			{/*	{(user.isAdmin === true)
 						? <>
 							<NavDropdown title="Orders" id="nav-dropdown">
 							  <NavDropdown.Item eventKey="4.1">All Pending Orders</NavDropdown.Item>
@@ -56,17 +56,24 @@ export default function AppNavbar() {
 						</>
 					}*/}
 
-					{(user.accessToken === null)
-						? <>
+					{ (user.accessToken === null)
+					  ? <>
 							<Nav.Link as={Link} to="/login"><h5>{`𝗟𝗼𝗴𝗶𝗻`}</h5></Nav.Link>
 							<Nav.Link as={Link} to="/register"><h5>{`𝗥𝗲𝗴𝗶𝘀𝘁𝗲𝗿`}</h5></Nav.Link>
 						</>
-						: <> 
-							<Nav.Link as={Link} to="/mycart"><h5>Cart <AiOutlineShoppingCart /></h5></Nav.Link>
+					  : <>
+					      {(user.isAdmin === true)
+					        ? 
+					          <Nav.Link as={Link} to="/logout"><h5>{`𝗟𝗼𝗴𝗼𝘂𝘁`}   <BiLogOut /></h5></Nav.Link>
+					        : 
+					        	<>
+					        <Nav.Link as={Link} to="/mycart"><h5>{`𝗖𝗮𝗿𝘁`} <AiOutlineShoppingCart /></h5></Nav.Link>
 							<Nav.Link as={Link} to="/logout"><h5>{`𝗟𝗼𝗴𝗼𝘂𝘁`}   <BiLogOut /></h5></Nav.Link>
-						</>
-
+							</>
+					      }
+					    </>
 					}
+
 
 					<Nav.Link as={Link} to="/products"><h5><MdDarkMode /></h5></Nav.Link>
 				</Nav>

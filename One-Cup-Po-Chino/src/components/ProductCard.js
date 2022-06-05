@@ -30,9 +30,6 @@ export default function ProductCard({productProp}) {
 
 			</Card.Body>
 		</Card>
-
-
-
 		)
 }
 

@@ -87,6 +87,13 @@ export default function Login() {
 						//push to the /products
 						navigate('/products')
 					}else {
+						Swal.fire({
+						  position: 'top-end',
+						  icon: 'success',
+						  title: `Welcome, ${data.email}!`,
+						  showConfirmButton: false,
+						  timer: 1500
+						})
 						//if not an admin, push to '/' (homepage)
 						navigate('/')
 					}

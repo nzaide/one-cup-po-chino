@@ -17,7 +17,7 @@ export default function SpecificProduct() {
 	const [description, setDescription] = useState('');
 	const [price, setPrice] = useState(0);
 	const [quantity, setQuantity] = useState(0);
-	const [subTotal, setSubTotal] = useState(quantity * price);
+	const [subTotal, setSubTotal] = useState(0);
 	const [cart, setCart] = useState([]);
 
 	useEffect(() => {
@@ -48,20 +48,22 @@ export default function SpecificProduct() {
 		
 	}
 
-	const addTocart = async (itemId, quant) => {
-		if(await quant === 0) {
+	const addToCart =  (itemId, quant, sub) => {
+		if( quant === 0) {
 			Swal.fire({
 				title: 'Quantity cannot be zero',
 				icon: 'error'
 			})
 		} else {
-
-			//new data every time addTocart is invoked
+			console.log(sub)
+			console.log(subTotal)
+			//new data every time addToCart is invoked
 			let newCartItem = {
 				productId: itemId,
 				name: name,
 				price: price,
-				quantity: quant
+				quantity: quant,
+				subTotal: sub
 			}
 			console.log(newCartItem)
 
@@ -72,9 +74,24 @@ export default function SpecificProduct() {
 
 			//gets previously stored data if there's any
 			let storedData = JSON.parse(localStorage.getItem('cartitems'));
-			storedData.push(newCartItem)
 
-			localStorage.setItem('cartitems', JSON.stringify(storedData));
+			let newCartArray = [];
+			let isExisting = false;
+
+			for (let i = 0; i < storedData.length ; i++) {
+				if (storedData[i].productId === itemId){
+					storedData[i].quantity += quant;
+					storedData[i].subTotal += subTotal;
+					isExisting = true;
+				}
+				newCartArray.push(storedData[i])
+			}
+
+			if (isExisting === false) {
+				newCartArray.push(newCartItem)
+			}
+
+			localStorage.setItem('cartitems', JSON.stringify(newCartArray));
 			
 			Swal.fire({
 			  position: 'top-end',
@@ -110,7 +127,7 @@ export default function SpecificProduct() {
 					<Button variant="dark" onClick={incrementQuantity}> + </Button> 
 						<h4>Subtotal: <span>&#8369;</span>{subTotal} </h4>
 					<Button className="mx-2" variant="secondary" as={Link} to="/products"> {<GrFormPreviousLink />} </Button>
-					<Button className="mx-1" variant="dark" onClick={() => addTocart(productId, quantity)}> Add to Cart </Button>
+					<Button className="mx-1" variant="dark" onClick={() => addToCart(productId, quantity, subTotal)}> Add to Cart </Button>
 					<Button className="mx-1" variant="dark" as={ Link } to={`/mycart`}> View Cart</Button>
 					</>
 					:

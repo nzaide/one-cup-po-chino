@@ -21,14 +21,18 @@ export default function AdminView(props) {
 					<td>{product.name}</td>
 					<td>{product.description}</td>
 					<td>{product.price}</td>
-					<td className={product.isActive ? "text-success" : "text-danger"}>
-						{product.isActive ? "Available" : "Unavailable"}
+					<td className={
+						product.isActive ? 
+							"text-success" : "text-danger" 
+						}>
+						{
+							product.isActive ? "Available" : "Unavailable"}
 					</td>
 					<td>
 						<EditProduct specificProduct={product._id} fetchData={fetchData}/>
 					</td>
 					<td>
-						<ProductStatus specificProductStatus={product._id} isActive={product.isActive} fetchData={fetchData}/>
+						<ProductStatus specificProductStatus={product._id}isActive={product.isActive} fetchData={fetchData}/>
 					</td>
 				</tr>
 				)
