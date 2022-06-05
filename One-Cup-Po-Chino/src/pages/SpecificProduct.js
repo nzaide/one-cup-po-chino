@@ -4,7 +4,8 @@ import { Container, Card, Button, Form, FormControl } from 'react-bootstrap';
 import UserContext from '../UserContext';
 import Swal from 'sweetalert2';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import "../App.css";
+import { GrFormPreviousLink } from "react-icons/gr";
+import CartView from '../pages/CartView';
 
 export default function SpecificProduct() {
 
@@ -16,7 +17,8 @@ export default function SpecificProduct() {
 	const [description, setDescription] = useState('');
 	const [price, setPrice] = useState(0);
 	const [quantity, setQuantity] = useState(0);
-	const [subTotal, setSubTotal] = useState(0);
+	const [subTotal, setSubTotal] = useState(quantity * price);
+	const [cart, setCart] = useState([]);
 
 	useEffect(() => {
 
@@ -36,55 +38,56 @@ export default function SpecificProduct() {
 
 	function decrementQuantity () {
 		setQuantity(prevQuantity => prevQuantity - 1)
-		setSubTotal(setSubTotal => quantity * price)
 		if(quantity === 0) {
 			setQuantity(0)
-			setSubTotal(0)
 		}
-
 	}
 
 	function incrementQuantity () {
 		setQuantity(prevQuantity => prevQuantity + 1)
-		setSubTotal(setSubTotal => quantity * price)
+		
 	}
 
-
-	//enroll function
-	const enroll = (productId) => {
-
-		fetch('http://localhost:4000/products/users/enroll', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${ localStorage.getItem('accessToken') }`
-			},
-			body: JSON.stringify({
-				productId: productId,
-				quantity: quantity
+	const addTocart = async (itemId, quant) => {
+		if(await quant === 0) {
+			Swal.fire({
+				title: 'Quantity cannot be zero',
+				icon: 'error'
 			})
-		})
-		.then(res => res.json())
-		.then(data => {
-			console.log(data)
+		} else {
 
-			if(data){
-				Swal.fire({
-					title: 'Successfully enrolled!',
-					icon: 'success',
-					text: `You have successfully enrolled for this ${ name } product`
-				})
-
-				navigate('/products')
-			} else {
-				Swal.fire({
-					title: 'error!',
-					icon: 'error',
-					text: 'Something went wrong, please try again'
-				})
+			//new data every time addTocart is invoked
+			let newCartItem = {
+				productId: itemId,
+				name: name,
+				price: price,
+				quantity: quant
 			}
-		})
+			console.log(newCartItem)
+
+			//save an empty array if nothing is stored yet
+			if(localStorage.getItem('cartitems') == null){
+				localStorage.setItem('cartitems', '[]')
+			}
+
+			//gets previously stored data if there's any
+			let storedData = JSON.parse(localStorage.getItem('cartitems'));
+			storedData.push(newCartItem)
+
+			localStorage.setItem('cartitems', JSON.stringify(storedData));
+			
+			Swal.fire({
+			  position: 'top-end',
+			  icon: 'success',
+			  title: `Successfully added ${name} to your cart!`,
+			  showConfirmButton: false,
+			  timer: 1500
+			})
+		}
+		
 	}
+
+
 
 	return(
 		<Container>
@@ -94,22 +97,24 @@ export default function SpecificProduct() {
 				</Card.Header>
 
 				<Card.Body>
-					<Card.Text>{ description }</Card.Text>
-					<h6>Price:  <span>&#8369;</span> { price } </h6>
-					<h6>
-							 <Button variant="dark" onClick={decrementQuantity}> - </Button>
-							 <span> {` ${quantity} `} </span>
-						<Button variant="dark" onClick={incrementQuantity}> + </Button> 
-					</h6>
+					<Card.Text><h5> { description } </h5></Card.Text>
+					<h4>Price:  <span>&#8369;</span>{ price } </h4>
 
-					<h6>Subtotal: <span>&#8369;</span> {subTotal} </h6>
 				</Card.Body>
 
 				<Card.Footer>
 				{ user.accessToken !== null ?
-					<Button variant="dark" onClick={() => enroll(productId)}>Add to Cart</Button>
+					<>
+					<Button variant="dark" onClick={decrementQuantity}> - </Button>
+							 <span> {` ${quantity} `} </span>
+					<Button variant="dark" onClick={incrementQuantity}> + </Button> 
+						<h4>Subtotal: <span>&#8369;</span>{subTotal} </h4>
+					<Button className="mx-2" variant="secondary" as={Link} to="/products"> {<GrFormPreviousLink />} </Button>
+					<Button className="mx-1" variant="dark" onClick={() => addTocart(productId, quantity)}> Add to Cart </Button>
+					<Button className="mx-1" variant="dark" as={ Link } to={`/mycart`}> View Cart</Button>
+					</>
 					:
-					<Button variant="dark" as={ Link } to="/login">Login to Purchase</Button>
+					<Button variant="dark" as={ Link } to="/login"><h4>Login to Purchase</h4></Button>
 				 }
 					
 					

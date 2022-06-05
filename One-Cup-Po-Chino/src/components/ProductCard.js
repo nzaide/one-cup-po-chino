@@ -24,7 +24,7 @@ export default function ProductCard({productProp}) {
 				<Card.Text> { description } </Card.Text>
 
 				<Card.Subtitle>Price:</Card.Subtitle>
-				<Card.Text>Php  { price } </Card.Text>
+				<Card.Text><span>&#8369;</span>  { price } </Card.Text>
 
 				<Button variant="dark" as={ Link } to={`/products/findproduct/${_id}`}>See More</Button>
 

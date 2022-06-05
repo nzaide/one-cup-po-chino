@@ -4,7 +4,7 @@ import UserView from '../components/UserView';
 import AdminView from '../components/AdminView';
 import { useContext, useEffect, useState } from 'react';
 import UserContext from '../UserContext';
-
+import { SiBuymeacoffee } from "react-icons/si";
 
 export default function ProductsPage() {
 
@@ -29,13 +29,17 @@ export default function ProductsPage() {
 		<>
 			
 
+
 			{(user.isAdmin === true) ?
 
 				<AdminView productsData={allProducts} fetchData={fetchData}/>
-
 				:
-
-				<UserView productsData={allProducts} />
+				<>
+					<div className="my-4">
+						<h1>Fancy a Cuppa'? <SiBuymeacoffee /></h1>
+					</div>
+					<UserView productsData={allProducts} />
+				</>
 			}
 			
 
