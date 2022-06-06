@@ -19,7 +19,6 @@ export default function Banner(props) {
 		})
 		.then(res => res.json())
 		.then(data => {
-			console.log(data)
 			let name = data.email.split('@')
 			setName(name[0].charAt(0).toUpperCase() + name[0].slice(1))
 		})

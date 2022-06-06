@@ -110,7 +110,7 @@ export default function SpecificProduct() {
 		<Container>
 			<Card>
 				<Card.Header>
-					<h4>{ name }</h4>
+					<h4 className="p-2"  variant="warning" style={{fontWeight: 'bold'}}>{ name }</h4>
 				</Card.Header>
 
 				<Card.Body>
@@ -126,9 +126,9 @@ export default function SpecificProduct() {
 							 <span> {` ${quantity} `} </span>
 					<Button variant="dark" onClick={incrementQuantity}> + </Button> 
 						<h4>Subtotal: <span>&#8369;</span>{subTotal} </h4>
-					<Button className="mx-2" variant="secondary" as={Link} to="/products"> {<GrFormPreviousLink />} </Button>
-					<Button className="mx-1" variant="dark" onClick={() => addToCart(productId, quantity, subTotal)}> Add to Cart </Button>
-					<Button className="mx-1" variant="dark" as={ Link } to={`/mycart`}> View Cart</Button>
+					<Button className="text-danger mx-2" style={{fontWeight: 'bold'}} variant="warning" as={Link} to="/products" > {<GrFormPreviousLink />} </Button>
+					<Button className="bg-dark text-warning mx-1" style={{fontWeight: 'bold'}} variant="dark" onClick={() => addToCart(productId, quantity, subTotal)}> Add to Cart </Button>
+					<Button className="bg-dark text-warning mx-1" style={{fontWeight: 'bold'}} variant="dark" as={ Link } to={`/mycart`}> View Cart</Button>
 					</>
 					:
 					<Button variant="dark" as={ Link } to="/login"><h4>Login to Purchase</h4></Button>

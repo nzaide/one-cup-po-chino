@@ -34,63 +34,63 @@ export default function Register() {
 		}
 	}, [email, password, verifyPassword, passwordStatus])
 
+	//[REGISTER FUNCTION]
+				function registerUser(e) {
+					e.preventDefault();
 
-	function registerUser(e) {
-		e.preventDefault();
+						fetch('http://localhost:4000/users/register', {
+							method: 'POST',
+							headers: {'Content-Type': 'application/json'},
+							body: JSON.stringify({
+								email: email,
+								password: password
+							})
+						})
+						.then(res => res.json())
+						.then(data => {
+							console.log(data.message)
 
-			fetch('http://localhost:4000/users/register', {
-				method: 'POST',
-				headers: {'Content-Type': 'application/json'},
-				body: JSON.stringify({
-					email: email,
-					password: password
-				})
-			})
-			.then(res => res.json())
-			.then(data => {
-				console.log(data.message)
+							if(data){
 
-				if(data){
+								if(data.message === `Email already existed. Do you wish to login?`) {
+									Swal.fire({
+									title: 'error',
+									icon: 'error',
+									text: 'Email already existed. Do you wish to login?'
+									})
 
-					if(data.message === `Email already existed. Do you wish to login?`) {
-						Swal.fire({
-						title: 'error',
-						icon: 'error',
-						text: 'Email already existed. Do you wish to login?'
+								} else {
+									Swal.fire({
+									  title: 'Registration Successful! You may now Login.',
+									  width: 600,
+									  padding: '3em',
+									  color: '#716add',
+									  background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
+									  backdrop: `
+									    rgba(0,0,123,0.4)
+									    url("https://sweetalert2.github.io/images/nyan-cat.gif")
+									    left top
+									    no-repeat
+									  `
+									})
+									navigate('/login')
+								}
+
+							} 
+							else {
+								Swal.fire({
+									title: 'error',
+									icon: 'error',
+									text: 'Please try again'
+								})
+							}
+
 						})
 
-					} else {
-						Swal.fire({
-						  title: 'Registration Successful! You may now Login.',
-						  width: 600,
-						  padding: '3em',
-						  color: '#716add',
-						  background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
-						  backdrop: `
-						    rgba(0,0,123,0.4)
-						    url("https://sweetalert2.github.io/images/nyan-cat.gif")
-						    left top
-						    no-repeat
-						  `
-						})
-						navigate('/login')
-					}
-
-				} 
-				else {
-					Swal.fire({
-						title: 'error',
-						icon: 'error',
-						text: 'Please try again'
-					})
 				}
 
-			})
 
-	}
-
-
-
+	
 	return(
 
 		<div className="container w-100">

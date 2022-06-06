@@ -25,9 +25,6 @@ export default function AppNavbar() {
 	// const [ user, setUser ] = useState(localStorage.getItem('email'))
 	// console.log(user)
 
-
-	console.log(user.accessToken)
-
 	return(
 		<Navbar bg="light" expand="lg" variant="light" className="mb-5">
 			<Navbar.Brand className="ms-4" as={Link} to="/" ><h1>{`Ⲟⲛⲉ-Ⲥ𐌵ⲣ-Ⲣⲟ-Ⲥⲏⲓⲛⲟ`}   <GiCoffeeBeans /></h1>  </Navbar.Brand>
@@ -68,6 +65,7 @@ export default function AppNavbar() {
 					        : 
 					        	<>
 					        <Nav.Link as={Link} to="/mycart"><h5>{`𝗖𝗮𝗿𝘁`} <AiOutlineShoppingCart /></h5></Nav.Link>
+					        <Nav.Link as={Link} to="/myorders"><h5>{`𝗢𝗿𝗱𝗲𝗿𝘀`} <AiOutlineShoppingCart /></h5></Nav.Link>
 							<Nav.Link as={Link} to="/logout"><h5>{`𝗟𝗼𝗴𝗼𝘂𝘁`}   <BiLogOut /></h5></Nav.Link>
 							</>
 					      }

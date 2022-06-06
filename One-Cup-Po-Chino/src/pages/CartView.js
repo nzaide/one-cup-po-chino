@@ -3,8 +3,7 @@ import { Form, Table, Button, TextField } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AiOutlineShoppingCart } from "react-icons/ai";
-
-import EditCartQuantity from '../components/EditCartQuantity';
+import { GiCoffeeBeans } from "react-icons/gi";
 
 export default function CartView() {
 
@@ -12,84 +11,53 @@ export default function CartView() {
 	const [quantity, setQuantity] = useState('');
 	const [name, setName] = useState('');
 	const [grandTotal, setGrandTotal] = useState(0);
+	const [storedData, setStoredData] = useState(JSON.parse(localStorage.getItem('cartitems')));
 	const navigate = useNavigate();
-
-	let storedData = JSON.parse(localStorage.getItem('cartitems'));
 
 	useEffect(() => {
 		//[incrementQuantity Fucntion]
 				function incrementQuantity (prodId) {
-
-					let dataToIncrement = JSON.parse(localStorage.getItem('cartitems'));
 					let updatedCartArray = [];
-					for (let i = 0; i < dataToIncrement.length ; i++) {
-						if (dataToIncrement[i].productId === prodId){
-							dataToIncrement[i].quantity += 1;
-							dataToIncrement[i].subTotal = dataToIncrement[i].quantity * dataToIncrement[i].price
+					for (let i = 0; i < storedData.length ; i++) {
+						if (storedData[i].productId === prodId){
+							storedData[i].quantity += 1;
+							storedData[i].subTotal = storedData[i].quantity * storedData[i].price
 						}
-						updatedCartArray.push(dataToIncrement[i])
+						updatedCartArray.push(storedData[i])
+						
 					}
 					localStorage.setItem('cartitems', JSON.stringify(updatedCartArray));
-					let updatedStoredData = JSON.parse(localStorage.getItem('cartitems')); 
-
-					const cartArr = updatedStoredData.map(cartitem => {
-							
-							return(
-								<tr key={cartitem.productId}>
-									<td  Colspan="8">{cartitem.name}</td>
-									<td><span>&#8369;</span> {cartitem.price}</td>
-									<td>
-									<Button className="mx-2" variant="dark" onClick={() => decrementQuantity(cartitem.productId)}> - </Button>
-											 <span> {` ${cartitem.quantity} `} </span>
-									<Button className="mx-2" variant="dark" onClick={() => incrementQuantity(cartitem.productId)}> + </Button>
-									</td>
-									<td><span>&#8369;</span>  {cartitem.subTotal}
-									</td>
-								</tr>
-								)
-					})
-					setCart(cartArr)
 					window.location.reload(false);
 				}
 		//[decrementQuantity Fucntion]
 				function decrementQuantity (prodId) {
-
-					let dataToDecrement = JSON.parse(localStorage.getItem('cartitems'));
 					let updatedCartArray = [];
-					for (let i = 0; i < dataToDecrement.length ; i++) {
-						if (dataToDecrement[i].productId === prodId){
-							if(dataToDecrement[i].quantity === 0) {
-								dataToDecrement[i].quantity = 0
+					for (let i = 0; i < storedData.length ; i++) {
+						if (storedData[i].productId === prodId){
+							if(storedData[i].quantity === 1) {
+								storedData[i].quantity = 1
 							} else {
-								dataToDecrement[i].quantity -= 1;
-								dataToDecrement[i].subTotal = dataToDecrement[i].quantity * dataToDecrement[i].price
+								storedData[i].quantity -= 1;
+								storedData[i].subTotal = storedData[i].quantity * storedData[i].price
 							}
 						}
-						updatedCartArray.push(dataToDecrement[i])
+						updatedCartArray.push(storedData[i])
 					}
 					localStorage.setItem('cartitems', JSON.stringify(updatedCartArray));
-					let updatedStoredData = JSON.parse(localStorage.getItem('cartitems')); 
-
-					const cartArr = updatedStoredData.map(cartitem => {
-							
-							return(
-								<tr key={cartitem.productId}>
-									<td  Colspan="8">{cartitem.name}</td>
-									<td><span>&#8369;</span> {cartitem.price}</td>
-									<td>
-									<Button className="mx-2" variant="dark" onClick={() => decrementQuantity(cartitem.productId)}> - </Button>
-											 <span> {` ${cartitem.quantity} `} </span>
-									<Button className="mx-2" variant="dark" onClick={() => incrementQuantity(cartitem.productId)}> + </Button>
-									</td>
-									<td><span>&#8369;</span>  {cartitem.subTotal}
-									</td>
-								</tr>
-								)
-					})
-					setCart(cartArr)
 					window.location.reload(false);
 				}
 		//[removeAnItem Function]
+				function removeItem (prodId) {
+					let updatedCartArray = [];
+					for (let i = 0; i < storedData.length ; i++) {
+						if (storedData[i].productId === prodId){
+								continue;
+							}
+						updatedCartArray.push(storedData[i])
+					}
+					localStorage.setItem('cartitems', JSON.stringify(updatedCartArray));
+					window.location.reload(false);
+				}
 
 		if(localStorage.getItem('cartitems') == null){
 			localStorage.setItem('cartitems', '[]')
@@ -105,19 +73,24 @@ export default function CartView() {
 					setGrandTotal(prevGrandTotal => prevGrandTotal + cartitem.subTotal)
 					return(
 						<tr key={cartitem.productId}>
-							<td  Colspan="8">{cartitem.name}</td>
-							<td><span>&#8369;</span> {cartitem.price}</td>
+							<td Colspan="8" className="bg-light text-success" style={{fontWeight: 'bold'}}> <GiCoffeeBeans /> {cartitem.name}</td>
+							<td className="bg-light text-dark" style={{fontWeight: 'bold'}}><span>&#8369;</span> {cartitem.price}</td>
 							<td>
 							<Button className="mx-2" variant="dark" onClick={() => decrementQuantity(cartitem.productId)}> - </Button>
 									 <span> {` ${cartitem.quantity} `} </span>
 							<Button className="mx-2" variant="dark" onClick={() => incrementQuantity(cartitem.productId)}> + </Button>
 
 							</td>
-							<td><span>&#8369;</span>  {cartitem.subTotal}
+							<td className="bg-light text-danger" style={{fontWeight: 'bold'}} ><span>&#8369;</span>  {cartitem.subTotal}
 							</td>
+							<td>
+							<Button className="mx-2" variant="dark" onClick={() => removeItem(cartitem.productId)}> Remove </Button>
+							</td>
+
 						</tr>
 						)
 			})
+			setStoredData(JSON.parse(localStorage.getItem('cartitems')))
 			setCart(cartArr)
 		}
 	}, [quantity])
@@ -142,15 +115,6 @@ export default function CartView() {
 							newOrder.push(cartItem)
 							
 						}
-
-						console.log(newOrder)
-						
-						if( quantity === 0) {
-							Swal.fire({
-								title: 'Quantity cannot be zero',
-								icon: 'error'
-							})
-						} else {
 							fetch('http://localhost:4000/orders/createorder', {
 							method: 'POST',
 							headers: {
@@ -173,7 +137,7 @@ export default function CartView() {
 								  timer: 3000
 								})
 								localStorage.removeItem('cartitems');
-								navigate('/')
+								navigate('/myorders')
 							} else {
 								Swal.fire({
 									title: 'error!',
@@ -183,7 +147,7 @@ export default function CartView() {
 								})
 							}
 						})	
-					}
+					
 				}
 			}
 
@@ -201,6 +165,7 @@ export default function CartView() {
 						<th>{`𝗣𝗥𝗜𝗖𝗘`}</th>
 						<th>{`𝗤𝗨𝗔𝗡𝗧𝗜𝗧𝗬`}</th>
 						<th>{`𝗦𝗨𝗕𝗧𝗢𝗧𝗔𝗟`}</th>
+						<th>{` `}</th>
 					</tr>
 				</thead>
 
@@ -208,8 +173,8 @@ export default function CartView() {
 					{ cart }
 				</tbody>
 			</Table>
-			<Button variant="dark" style={{float: "right"}} onClick={() => addToOrders(cart)}> {`𝗖𝗛𝗘𝗖𝗞𝗢𝗨𝗧`} </Button>
-			<div className="m-2" style={{float: "right"}}> <h3>{`𝗚𝗿𝗮𝗻𝗱 𝗧𝗼𝘁𝗮𝗹: `} <span>&#8369;</span> {grandTotal} </h3>  </div>
+			<Button className="p-3"  variant="warning" style={{float: "right", fontWeight: 'bold'}} onClick={() => addToOrders(cart)}> CHECKOUT </Button>
+			<div className="bg-dark text-warning mx-2 p-2" style={{fontWeight: 'bold'}} style={{float: "right"}}> <h3>{`𝗚𝗿𝗮𝗻𝗱 𝗧𝗼𝘁𝗮𝗹: `} <span>&#8369;</span > {grandTotal} </h3>  </div>
 		</>
 
 		)

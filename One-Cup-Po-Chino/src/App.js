@@ -12,6 +12,7 @@ import Logout from './pages/Logout';
 import PageNotFound from './pages/PageNotFound';
 import SpecificProduct from './pages/SpecificProduct';
 import CartView from './pages/CartView';
+import OrdersPage from './pages/OrdersPage';
 import { Container } from 'react-bootstrap';
 import { UserProvider } from './UserContext';
 import { BiAdjust } from "react-icons/bi";
@@ -50,6 +51,7 @@ function App() {
                         <Route path="/login" element={ <Login /> }/>
                         <Route path="/logout" element={ <Logout /> }/>
                         <Route path="/mycart" element={ <CartView /> }/>
+                        <Route path="/myorders" element={ <OrdersPage /> }/>
                         <Route path="/products/findproduct/:productId" element={ <SpecificProduct /> }/>
                         <Route path="*" element={ <PageNotFound /> } />
                 </Routes>

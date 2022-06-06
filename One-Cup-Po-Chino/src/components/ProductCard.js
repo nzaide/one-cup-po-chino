@@ -18,7 +18,7 @@ export default function ProductCard({productProp}) {
 	return(
 		<Card className="m-2">
 			<Card.Body>
-				<Card.Title> { name } </Card.Title>
+				<Card.Title className="bg-light text-dark" style={{fontWeight: 'bold'}}> { name } </Card.Title>
 
 				<Card.Subtitle>Description:</Card.Subtitle>
 				<Card.Text> { description } </Card.Text>
@@ -26,7 +26,7 @@ export default function ProductCard({productProp}) {
 				<Card.Subtitle>Price:</Card.Subtitle>
 				<Card.Text><span>&#8369;</span>  { price } </Card.Text>
 
-				<Button variant="dark" as={ Link } to={`/products/findproduct/${_id}`}>See More</Button>
+				<Button variant="warning" className="bg-dark text-warning" style={{fontWeight: 'bold'}} as={ Link } to={`/products/findproduct/${_id}`}>See More</Button>
 
 			</Card.Body>
 		</Card>
