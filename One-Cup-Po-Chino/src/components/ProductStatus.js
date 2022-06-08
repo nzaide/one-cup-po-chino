@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 export default function ProductStatus({ specificProductStatus, isActive, fetchData}) {
 
 	const archiveToggle = (productId) => {
-		fetch(`http://localhost:4000/products/archive/${ productId }`,{
+		fetch(`https://cup-po-chino.herokuapp.com/products/archive/${ productId }`,{
 			method: 'PUT',
 			headers: {
 				Authorization: `Bearer ${ localStorage.getItem('accessToken')}`
@@ -33,7 +33,7 @@ export default function ProductStatus({ specificProductStatus, isActive, fetchDa
 	//for activating the product
 	const activateToggle = (productId) => {
 		console.log(productId)
-		fetch(`http://localhost:4000/products/activate/${ productId }`, {
+		fetch(`https://cup-po-chino.herokuapp.com/products/activate/${ productId }`, {
 			method: 'PUT',
 			headers: {
 				Authorization: `Bearer ${ localStorage.getItem('accessToken')}`
@@ -41,6 +41,7 @@ export default function ProductStatus({ specificProductStatus, isActive, fetchDa
 		})
 		.then(res => res.json())
 		.then(data => {
+			console.log(data)
 			if(data === true) {
 				Swal.fire({
 					title: 'success',
@@ -64,11 +65,11 @@ export default function ProductStatus({ specificProductStatus, isActive, fetchDa
 		<>
 
 			{isActive  ?
-				<Button variant="danger" size="sm" onClick={() => archiveToggle(specificProductStatus)}>Archive</Button>
+				<Button variant="dark" size="sm" style={{fontWeight: 'bold'}} onClick={() => archiveToggle(specificProductStatus)}>Archive</Button>
 
 				:
 
-				<Button variant="success" size="sm" onClick={() => activateToggle(specificProductStatus)}>Activate</Button>
+				<Button variant="warning" size="sm" style={{fontWeight: 'bold'}} onClick={() => activateToggle(specificProductStatus)}>Activate</Button>
 
 			}
 			

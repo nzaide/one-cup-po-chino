@@ -38,7 +38,7 @@ export default function Register() {
 				function registerUser(e) {
 					e.preventDefault();
 
-						fetch('http://localhost:4000/users/register', {
+						fetch('https://cup-po-chino.herokuapp.com/users/register', {
 							method: 'POST',
 							headers: {'Content-Type': 'application/json'},
 							body: JSON.stringify({
@@ -60,17 +60,11 @@ export default function Register() {
 
 								} else {
 									Swal.fire({
-									  title: 'Registration Successful! You may now Login.',
-									  width: 600,
-									  padding: '3em',
-									  color: '#716add',
-									  background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
-									  backdrop: `
-									    rgba(0,0,123,0.4)
-									    url("https://sweetalert2.github.io/images/nyan-cat.gif")
-									    left top
-									    no-repeat
-									  `
+									  position: 'top-end',
+									  icon: 'success',
+									  title: `Registration Successful!`,
+									  showConfirmButton: false,
+									  timer: 2000
 									})
 									navigate('/login')
 								}

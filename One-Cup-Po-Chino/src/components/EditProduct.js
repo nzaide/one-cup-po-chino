@@ -14,7 +14,7 @@ export default function EditCourse({ specificProduct, fetchData }){
 
 	//function openEdit to still get the data to the form while opening the modal
 	const openEdit = (productId) => {
-		fetch(`http://localhost:4000/products/findproduct/${ productId }`)
+		fetch(`https://cup-po-chino.herokuapp.com/products/findproduct/${ productId }`)
 		.then(res => res.json())
 		.then(data => {
 			//populate all input values with the course information that we fetched
@@ -40,7 +40,7 @@ export default function EditCourse({ specificProduct, fetchData }){
 	const editCourse = (e, productId) => {
 		e.preventDefault();
 
-		fetch(`http://localhost:4000/products/editProduct/${ productId }`, {
+		fetch(`https://cup-po-chino.herokuapp.com/products/editProduct/${ productId }`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ export default function EditCourse({ specificProduct, fetchData }){
 
 	return(
 		<>
-			<Button variant="primary" size="sm" onClick={() => openEdit(specificProduct)}>Update</Button>
+			<Button variant="warning" size="sm" style={{fontWeight: 'bold'}} onClick={() => openEdit(specificProduct)}>Update</Button>
 
 		{/*Edit Modal*/}
 
@@ -100,14 +100,10 @@ export default function EditCourse({ specificProduct, fetchData }){
 							 />
 						</Form.Group>
 
-						<Form.Group>
+						<Form.Group
+						    className="mb-3">
 							<Form.Label>Description</Form.Label>
-							<Form.Control 
-							      type="text"
-							      required
-							      value={description}
-							      onChange={e => setDescription(e.target.value)}
-							 />
+							<Form.Control as="textarea" rows={4} required value={description} onChange={e => setDescription(e.target.value)}/>
 						</Form.Group>
 
 						<Form.Group>
@@ -122,8 +118,8 @@ export default function EditCourse({ specificProduct, fetchData }){
 					</Modal.Body>
 
 					<Modal.Footer>
-						<Button variant="secondary" onClick={closeEdit}>Close</Button>
-						<Button variant="success" type="submit">Submit</Button>
+						<Button variant="dark" style={{fontWeight: 'bold'}} onClick={closeEdit}>Close</Button>
+						<Button variant="warning" style={{fontWeight: 'bold'}} type="submit">Submit</Button>
 					</Modal.Footer>
 
 				</Form>

@@ -36,5 +36,7 @@ export default function Highlights(){
 			</Col>
 
 		</Row>
+
+		
 		)
 }

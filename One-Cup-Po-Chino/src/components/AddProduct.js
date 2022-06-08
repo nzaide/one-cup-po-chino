@@ -16,7 +16,7 @@ export default function AddProduct({fetchData}) {
 	const addProduct = (e) => {
 		e.preventDefault();
 
-		fetch('http://localhost:4000/products/create', {
+		fetch('https://cup-po-chino.herokuapp.com/products/create', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ export default function AddProduct({fetchData}) {
 
 	return(
 		<>
-			<Button variant="dark" onClick={openAdd}>Add New Product</Button>
+			<Button variant="warning" style={{fontWeight: 'bold'}} onClick={openAdd}>Add New Product</Button>
 
 			{/* Add Modal */}
 
@@ -86,7 +86,7 @@ export default function AddProduct({fetchData}) {
 						</Form.Group>
 
 						<Form.Group
-						    className="mb-3">
+						    className="">
 							<Form.Label>Description</Form.Label>
 							<Form.Control as="textarea" rows={4} required value={description} onChange={e => setDescription(e.target.value)}/>
 						</Form.Group>

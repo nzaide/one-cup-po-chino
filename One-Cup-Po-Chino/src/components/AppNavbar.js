@@ -24,9 +24,9 @@ export default function AppNavbar() {
 	const { user } = useContext(UserContext);
 
 	const [name, setName] = useState('');
-
+	
 	useEffect(() => {
-		fetch('http://localhost:4000/users/details', {
+		fetch('https://cup-po-chino.herokuapp.com/users/details', {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem('accessToken')}`
 			}
@@ -36,7 +36,9 @@ export default function AppNavbar() {
 			let name = data.email.split('@')
 			setName(name[0].charAt(0).toUpperCase() + name[0].slice(1))
 		})
+		
 	}, [])
+	
 
 	return(
 
@@ -56,7 +58,10 @@ export default function AppNavbar() {
 					  : <>
 					      {(user.isAdmin === true)
 					        ? 
+					        <>
 					          <Nav.Link as={Link} to="/logout"><h6><BiLogOut /> {`𝗟𝗼𝗴𝗼𝘂𝘁`}</h6></Nav.Link>
+					          <Nav.Link as={Link} to="/"><h6> <FaRegUserCircle /> {`Hello, ${name}`} </h6></Nav.Link>
+					         </>
 					        : 
 					        	<>
 					        <Nav.Link as={Link} to="/mycart"><h6><AiOutlineShoppingCart/> {`𝗖𝗮𝗿𝘁`} </h6></Nav.Link>

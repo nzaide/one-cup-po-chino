@@ -43,7 +43,7 @@ export default function AdminView(props) {
 
 	return(
 		<>
-			<div className="my-4">
+			<div className="my-2">
 				<h1>Admin Dashboard</h1>
 				<AddProduct fetchData={fetchData} />
 			</div>

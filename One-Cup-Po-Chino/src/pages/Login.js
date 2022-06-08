@@ -28,7 +28,7 @@ export default function Login() {
 	function authentication(e) {
 		e.preventDefault();
 
-		fetch('http://localhost:4000/users/login', {
+		fetch('https://cup-po-chino.herokuapp.com/users/login', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
@@ -45,7 +45,7 @@ export default function Login() {
 				})
 
 				//get user's details from our token
-				fetch('http://localhost:4000/users/details', {
+				fetch('https://cup-po-chino.herokuapp.com/users/details', {
 					headers: {
 						Authorization: `Bearer ${data.accessToken}`
 					}
@@ -54,6 +54,7 @@ export default function Login() {
 				.then(data => {
 
 					if(data.isAdmin === true) {
+						
 						localStorage.setItem('isAdmin', data.isAdmin)
 
 						setUser({
@@ -65,21 +66,28 @@ export default function Login() {
 						  icon: 'success',
 						  title: `Welcome, Admin ${data.email}!`,
 						  showConfirmButton: false,
-						  timer: 1500
+						  timer: 2000
 						})
 
 						//push to the /products
+						
 						navigate('/products')
+						window.location.reload(false);
+
 					}else {
+						
 						Swal.fire({
 						  position: 'top-end',
 						  icon: 'success',
 						  title: `Welcome, ${data.email}!`,
-						  showConfirmButton: false,
-						  timer: 1500
+						  confirmButtonText: 'OK',
+						  confirmButtonColor: '#EAD2AC',
+						  timer: 2000
 						})
 						//if not an admin, push to '/' (homepage)
+						
 						navigate('/')
+						window.location.reload(false);
 					}
 
 				})
@@ -88,12 +96,13 @@ export default function Login() {
 				Swal.fire({
 					title: 'Ooopsss',
 					icon: 'error',
-					text: 'Something went wrong. Check your Credentials'
+					confirmButtonText: 'OK',
+					confirmButtonColor: '#EAD2AC',
+					text: 'Something went wrong. Please check your Credentials'
 				})
 			}
-
-			setEmail('')
 			setPassword('')
+
 		})
 
 	}

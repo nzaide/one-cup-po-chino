@@ -15,6 +15,7 @@ export default function CartView() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
+
 		//[incrementQuantity Fucntion]
 				function incrementQuantity (prodId) {
 					let updatedCartArray = [];
@@ -117,7 +118,7 @@ export default function CartView() {
 							newOrder.push(cartItem)
 							
 						}
-							fetch('http://localhost:4000/orders/createorder', {
+							fetch('https://cup-po-chino.herokuapp.com/orders/createorder', {
 							method: 'POST',
 							headers: {
 								'Content-Type': 'application/json',
