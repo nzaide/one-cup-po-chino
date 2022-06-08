@@ -4,6 +4,8 @@ import AddProduct from './AddProduct';
 import EditProduct from './EditProduct';
 import ProductStatus from './ProductStatus';
 
+import { GiCoffeeBeans } from "react-icons/gi";
+import { AiOutlineFieldNumber } from "react-icons/ai";
 
 export default function AdminView(props) {
 
@@ -17,13 +19,13 @@ export default function AdminView(props) {
 		const productsArr = productsData.map(product => {
 			return(
 				<tr key={product._id}>
-					<td>{product._id}</td>
-					<td>{product.name}</td>
+					<td colspan="2" className="bg-light text-success" style={{fontWeight: 'bold'}}><AiOutlineFieldNumber /> {product._id}</td>
+					<td className="bg-light text-dark"><GiCoffeeBeans /> {product.name}</td>
 					<td>{product.description}</td>
-					<td>{product.price}</td>
+					<td className="bg-light text-danger" style={{fontWeight: 'bold'}}><span>&#8369;</span>{product.price}</td>
 					<td className={
 						product.isActive ? 
-							"text-success" : "text-danger" 
+							"text-success bg-light" : "text-danger bg-light" 
 						}>
 						{
 							product.isActive ? "Available" : "Unavailable"}
@@ -51,7 +53,7 @@ export default function AdminView(props) {
 			<Table striped bordered hover responsive>
 				<thead className="bg-dark text-warning">
 					<tr>
-						<th>ID</th>
+						<th colspan="2">ID</th>
 						<th>NAME</th>
 						<th>DESCRIPTION</th>
 						<th>PRICE</th>

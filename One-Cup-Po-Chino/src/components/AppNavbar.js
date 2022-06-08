@@ -17,6 +17,8 @@ import { AiOutlineHome } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdProductionQuantityLimits } from "react-icons/md";
+import { BiLogInCircle } from "react-icons/bi";
+import { BiRegistered } from "react-icons/bi";
 
 export default function AppNavbar() {
 
@@ -24,7 +26,7 @@ export default function AppNavbar() {
 	const { user } = useContext(UserContext);
 
 	const [name, setName] = useState('');
-	
+
 	useEffect(() => {
 		fetch('https://cup-po-chino.herokuapp.com/users/details', {
 			headers: {
@@ -52,8 +54,8 @@ export default function AppNavbar() {
 
 					{ (user.accessToken === null)
 					  ? <>
-							<Nav.Link as={Link} to="/login"><h6>{`𝗟𝗼𝗴𝗶𝗻`}</h6></Nav.Link>
-							<Nav.Link as={Link} to="/register"><h6>{`𝗥𝗲𝗴𝗶𝘀𝘁𝗲𝗿`}</h6></Nav.Link>
+							<Nav.Link as={Link} to="/login"><h6><BiLogInCircle /> {`𝗟𝗼𝗴𝗶𝗻`} </h6></Nav.Link>
+							<Nav.Link as={Link} to="/register"><h6><BiRegistered /> {`𝗥𝗲𝗴𝗶𝘀𝘁𝗲𝗿`} </h6></Nav.Link>
 						</>
 					  : <>
 					      {(user.isAdmin === true)
