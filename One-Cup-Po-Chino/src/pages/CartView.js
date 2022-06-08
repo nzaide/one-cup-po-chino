@@ -102,7 +102,7 @@ export default function CartView() {
 			const addToOrders = () => {
 					if(storedData.length === 0) {
 							Swal.fire({
-							title: 'Nothing Here yet. Wanna to add a coffee?',
+							title: 'Nothing Here yet. Wanna add a coffee?',
 							icon: 'question',
 							confirmButtonColor: "#b36b14",
 						})
