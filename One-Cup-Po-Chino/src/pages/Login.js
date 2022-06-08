@@ -1,5 +1,3 @@
-//Login.js
-
 import { useState, useEffect, useContext } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
@@ -8,18 +6,6 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function Login() {
 
-	/*
-	Note for fetch()
-		- it is a method in JS, which allows to send a request to an api and process its response.
-
-	fetch('url', {optional object})
-	-url from the API (http://localhost:4000/users/login)(https://heroku.com/users/login)
-	-{optional objects} objects which contains additional information about our requests such as method, the body and the headers: content-type , authorization
-
-	//getting a response is usually a two-stage process
-	.then(response => response.json()) ====> parse the response as JSON
-	.then(actualData => console.log(actualData)) =====> process the result of the response
-	*/
 	const navigate = useNavigate();
 
 	//Consume the User Context object and it's properties to use for user validation and to get the email coming from the login
@@ -52,8 +38,6 @@ export default function Login() {
 		})
 		.then(response => response.json())
 		.then(data => {
-			console.log(data)
-
 			if(data.accessToken !== undefined){
 				localStorage.setItem('accessToken', data.accessToken);
 				setUser({

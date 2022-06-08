@@ -54,8 +54,6 @@ export default function SpecificProduct() {
 				icon: 'error'
 			})
 		} else {
-			console.log(sub)
-			console.log(subTotal)
 			//new data every time addToCart is invoked
 			let newCartItem = {
 				productId: itemId,
@@ -64,7 +62,6 @@ export default function SpecificProduct() {
 				quantity: quant,
 				subTotal: sub
 			}
-			console.log(newCartItem)
 
 			//save an empty array if nothing is stored yet
 			if(localStorage.getItem('cartitems') == null){

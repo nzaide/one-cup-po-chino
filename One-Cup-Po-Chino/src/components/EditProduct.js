@@ -14,12 +14,9 @@ export default function EditCourse({ specificProduct, fetchData }){
 
 	//function openEdit to still get the data to the form while opening the modal
 	const openEdit = (productId) => {
-		console.log()
 		fetch(`http://localhost:4000/products/findproduct/${ productId }`)
 		.then(res => res.json())
 		.then(data => {
-			console.log(data)
-
 			//populate all input values with the course information that we fetched
 			setProductId(data._id)
 			setName(data.name)
@@ -57,7 +54,6 @@ export default function EditCourse({ specificProduct, fetchData }){
 		})
 		.then(res => res.json())
 		.then(data => {
-			console.log(data)
 
 			if(data){
 				Swal.fire({

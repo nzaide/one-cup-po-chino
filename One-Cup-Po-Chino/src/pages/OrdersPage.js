@@ -18,9 +18,7 @@ export default function OrdersPage() {
 	})
 	.then(response => response.json())
 	.then(data => {
-		console.log(data)
 		setMyOrders(data)
-		console.log(myOrders)
 	})
 //
 	const ordersArr = myOrders.map(order => {
@@ -29,8 +27,6 @@ export default function OrdersPage() {
 			tempArray.push(` ${order.products[i].productName} - Quantity: ${order.products[i].quantity} | `)
 		}
 		let orderedProducts = tempArray.join('\r\n');
-		console.log(orderedProducts)
-
 		return(
 			<tr key={order._id} >
 				<td className="bg-light text-success" style={{fontWeight: 'bold'}}><AiOutlineFieldNumber /> {order._id}</td>

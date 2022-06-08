@@ -38,11 +38,6 @@ export default function AppNavbar() {
 		})
 	}, [])
 
-	//Store the user information (email) in the state
-	//getItem gets the key in the localStorage
-	// const [ user, setUser ] = useState(localStorage.getItem('email'))
-	// console.log(user)
-
 	return(
 
 		<Navbar bg="light" expand="lg" variant="light" className="m-2">
@@ -52,25 +47,6 @@ export default function AppNavbar() {
 				<Nav className="ms-auto">
 					<Nav.Link as={Link} to="/"><h6><AiOutlineHome /> {`𝗛𝗼𝗺𝗲`}</h6></Nav.Link>
 					<Nav.Link as={Link} to="/products"><h6><SiBuymeacoffee /> {`𝗣𝗿𝗼𝗱𝘂𝗰𝘁𝘀`}</h6></Nav.Link>
-
-			{/*	{(user.isAdmin === true)
-						? <>
-							<NavDropdown title="Orders" id="nav-dropdown">
-							  <NavDropdown.Item eventKey="4.1">All Pending Orders</NavDropdown.Item>
-							  <NavDropdown.Item eventKey="4.2">Find Specific Order</NavDropdown.Item>
-							  <NavDropdown.Divider />
-							  <NavDropdown.Item eventKey="4.4">Cancelled Orders</NavDropdown.Item>
-							</NavDropdown>
-						</>
-						: <> 
-							<NavDropdown title="Orders" id="nav-dropdown">
-							  <NavDropdown.Item eventKey="4.1">My Cart</NavDropdown.Item>
-							  <NavDropdown.Item eventKey="4.2">Order History</NavDropdown.Item>
-							  <NavDropdown.Divider />
-							  <NavDropdown.Item eventKey="4.4">Check Out</NavDropdown.Item>
-							</NavDropdown>
-						</>
-					}*/}
 
 					{ (user.accessToken === null)
 					  ? <>

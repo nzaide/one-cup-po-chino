@@ -4,7 +4,6 @@ import Swal from 'sweetalert2';
 export default function ProductStatus({ specificProductStatus, isActive, fetchData}) {
 
 	const archiveToggle = (productId) => {
-		console.log(productId)
 		fetch(`http://localhost:4000/products/archive/${ productId }`,{
 			method: 'PUT',
 			headers: {
