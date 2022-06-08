@@ -99,7 +99,7 @@ export default function Register() {
 			    <h1>{`ℝ𝕖𝕘𝕚𝕤𝕥𝕖𝕣`}</h1>
 				<Form.Group>
 					<Form.Label>Email Address</Form.Label>
-					<Form.Control 
+					<Form.Control
 					    type="email"
 					    placeholder="Enter email"
 					    required
@@ -124,7 +124,7 @@ export default function Register() {
 
 				<Form.Group>
 					<Form.Label>Verify Password</Form.Label>
-					<Form.Control 
+					<Form.Control
 					    type="password"
 					    placeholder="Verify Password"
 					    required

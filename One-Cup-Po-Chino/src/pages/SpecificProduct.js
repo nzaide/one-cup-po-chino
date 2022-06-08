@@ -32,7 +32,7 @@ export default function SpecificProduct() {
 
 		setSubTotal(quantity * price)
 
-	}, [subTotal, quantity])
+	}, [subTotal, quantity, cart])
 
 	const { user } = useContext(UserContext);
 
@@ -45,7 +45,6 @@ export default function SpecificProduct() {
 
 	function incrementQuantity () {
 		setQuantity(prevQuantity => prevQuantity + 1)
-		
 	}
 
 	const addToCart =  (itemId, quant, sub) => {

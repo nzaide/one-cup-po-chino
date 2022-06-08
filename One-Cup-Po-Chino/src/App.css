@@ -11,11 +11,12 @@
 }
 
 body {
- background-image: url("../public/coffee2.avif");
- background-color: #cccccc;
+/* background-image: url("../public/coffee2.avif");
+ background-color: #FFE2D1;
  background-position: right;
  background-repeat: no-repeat;
- background-attachment: fixed;
+ background-attachment: fixed;*/
+ 
 }
 
 .form-inline {

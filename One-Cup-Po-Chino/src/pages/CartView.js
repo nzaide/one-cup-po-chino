@@ -62,7 +62,7 @@ export default function CartView() {
 		if(localStorage.getItem('cartitems') == null){
 			localStorage.setItem('cartitems', '[]')
 			Swal.fire({
-				title: 'Nothing Here yet. Wanna to add a coffee?',
+				title: 'Nothing Here yet. Wanna add a coffee?',
 				icon: 'question',
 				confirmButtonColor: "#b36b14",
 			})
@@ -73,8 +73,10 @@ export default function CartView() {
 					setGrandTotal(prevGrandTotal => prevGrandTotal + cartitem.subTotal)
 					return(
 						<tr key={cartitem.productId}>
-							<td Colspan="8" className="bg-light text-success" style={{fontWeight: 'bold'}}> <GiCoffeeBeans /> {cartitem.name}</td>
-							<td className="bg-light text-dark" style={{fontWeight: 'bold'}}><span>&#8369;</span> {cartitem.price}</td>
+							<td Colspan="8" className="bg-light text-success" style={{fontWeight: 'bold'}}> <GiCoffeeBeans /> {cartitem.name}
+							</td>
+							<td className="bg-light text-dark" style={{fontWeight: 'bold'}}><span>&#8369;</span> {cartitem.price}
+							</td>
 							<td>
 							<Button className="mx-2" variant="dark" onClick={() => decrementQuantity(cartitem.productId)}> - </Button>
 									 <span> {` ${cartitem.quantity} `} </span>
