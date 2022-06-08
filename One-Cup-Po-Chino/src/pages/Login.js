@@ -65,8 +65,9 @@ export default function Login() {
 						  position: 'top-end',
 						  icon: 'success',
 						  title: `Welcome, Admin ${data.email}!`,
-						  showConfirmButton: false,
-						  timer: 2000
+						  confirmButtonText: 'OK',
+						  confirmButtonColor: '#152614',
+						  timer: 3000
 						})
 
 						//push to the /products
@@ -81,8 +82,8 @@ export default function Login() {
 						  icon: 'success',
 						  title: `Welcome, ${data.email}!`,
 						  confirmButtonText: 'OK',
-						  confirmButtonColor: '#EAD2AC',
-						  timer: 2000
+						  confirmButtonColor: '#152614',
+						  timer: 3000
 						})
 						//if not an admin, push to '/' (homepage)
 						
@@ -97,7 +98,7 @@ export default function Login() {
 					title: 'Ooopsss',
 					icon: 'error',
 					confirmButtonText: 'OK',
-					confirmButtonColor: '#EAD2AC',
+					confirmButtonColor: '#152614',
 					text: 'Something went wrong. Please check your Credentials'
 				})
 			}

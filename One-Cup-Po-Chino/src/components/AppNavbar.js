@@ -27,6 +27,7 @@ export default function AppNavbar() {
 
 	const [name, setName] = useState('');
 
+
 	useEffect(() => {
 		fetch('https://cup-po-chino.herokuapp.com/users/details', {
 			headers: {
@@ -38,11 +39,12 @@ export default function AppNavbar() {
 			let name = data.email.split('@')
 			setName(name[0].charAt(0).toUpperCase() + name[0].slice(1))
 		})
-		
-	}, [])
+		setName(name)
+	}, [name])
 	
 
 	return(
+
 
 		<Navbar bg="light" expand="lg" variant="light" className="m-2">
 			<Navbar.Brand className="ms-4" as={Link} to="/" ><h1>{`Ⲟⲛⲉ-Ⲥ𐌵ⲣ-Ⲣⲟ-Ⲥⲏⲓⲛⲟ`}   <GiCoffeeBeans /></h1>  </Navbar.Brand>

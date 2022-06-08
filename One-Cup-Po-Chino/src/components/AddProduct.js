@@ -64,7 +64,7 @@ export default function AddProduct({fetchData}) {
 
 	return(
 		<>
-			<Button variant="warning" style={{fontWeight: 'bold'}} onClick={openAdd}>Add New Product</Button>
+			<Button className="bg-warning text-dark" variant="dark" size="lg" style={{fontWeight: 'bold'}} onClick={openAdd}>Add New Product</Button>
 
 			{/* Add Modal */}
 
@@ -104,7 +104,7 @@ export default function AddProduct({fetchData}) {
 
 					<Modal.Footer>
 						<Button variant="dark" onClick={closeAdd}>Close</Button>
-						<Button variant="dark" type="submit">Submit</Button>
+						<Button variant="warning" type="submit">Submit</Button>
 					</Modal.Footer>
 
 				</Form>

@@ -14,16 +14,20 @@ export default function ProductStatus({ specificProductStatus, isActive, fetchDa
 		.then(data =>{
 			if(data === true) {
 				Swal.fire({
-					title: 'success',
+					title: 'Success',
 					icon: 'success',
-					text: 'Product successfully disabled'
+					confirmButtonText: 'OK',
+					confirmButtonColor: '#152614',
+					text: 'Product Successfully Disabled'
 				})
 				fetchData()
 			}else {
 				Swal.fire({
-					title: 'error',
+					title: 'Ooopsss',
 					icon: 'error',
-					text: 'Something went wrong'
+					confirmButtonText: 'OK',
+					confirmButtonColor: '#002A22',
+					text: 'Something went wrong. Please check your Credentials'
 				})
 				fetchData()
 			}
@@ -44,9 +48,11 @@ export default function ProductStatus({ specificProductStatus, isActive, fetchDa
 			console.log(data)
 			if(data === true) {
 				Swal.fire({
-					title: 'success',
+					title: 'Success',
 					icon: 'success',
-					text: 'Product successfully enabled'
+					confirmButtonText: 'OK',
+					confirmButtonColor: '#254441',
+					text: 'Product Successfully Enabled'
 				})
 				fetchData()
 			}else {

@@ -79,7 +79,7 @@ export default function EditCourse({ specificProduct, fetchData }){
 
 	return(
 		<>
-			<Button variant="warning" size="sm" style={{fontWeight: 'bold'}} onClick={() => openEdit(specificProduct)}>Update</Button>
+			<Button className="bg-warning text-dark" variant="dark" size="sm" style={{fontWeight: 'bold'}} onClick={() => openEdit(specificProduct)}>Update</Button>
 
 		{/*Edit Modal*/}
 
@@ -101,9 +101,9 @@ export default function EditCourse({ specificProduct, fetchData }){
 						</Form.Group>
 
 						<Form.Group
-						    className="mb-3">
+						    className="">
 							<Form.Label>Description</Form.Label>
-							<Form.Control as="textarea" rows={4} required value={description} onChange={e => setDescription(e.target.value)}/>
+							<Form.Control as="textarea" rows={5} required value={description} onChange={e => setDescription(e.target.value)}/>
 						</Form.Group>
 
 						<Form.Group>
