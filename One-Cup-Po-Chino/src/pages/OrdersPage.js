@@ -10,7 +10,7 @@ export default function OrdersPage() {
 
 	useEffect(() => {
 	
-	fetch('http://localhost:4000/orders/getmyorders', {
+	fetch('https://cup-po-chino.herokuapp.com/orders/getmyorders', {
 		headers: { 
 			'Content-Type': 'application/json', 
 			Authorization: `Bearer ${ localStorage.getItem('accessToken') }`

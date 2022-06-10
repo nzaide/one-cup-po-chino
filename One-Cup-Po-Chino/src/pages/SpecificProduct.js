@@ -1,6 +1,6 @@
 
 import { useState, useContext, useEffect } from 'react';
-import { Container, Card, Button, Form, FormControl } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Form, FormControl } from 'react-bootstrap';
 import UserContext from '../UserContext';
 import Swal from 'sweetalert2';
 import { useParams, Link, useNavigate } from 'react-router-dom';
@@ -23,7 +23,7 @@ export default function SpecificProduct() {
 
 	useEffect(() => {
 
-		fetch(`http://localhost:4000/products/findproduct/${ productId }`)
+		fetch(`https://cup-po-chino.herokuapp.com/products/findproduct/${ productId }`)
 		.then(res => res.json())
 		.then(data => {
 			setName(data.name)
@@ -105,38 +105,43 @@ export default function SpecificProduct() {
 
 
 	return(
-		<Container>
-			<Card >
-				<Card.Header>
-					<h2 className="p-2"  variant="warning" style={{fontWeight: 'bold'}}>{` ${name} ☕`}</h2>
-				</Card.Header>
+		<Row>
+			<Col xs={12} md={4}>
+				<Card className="cardHighlight p-4 text-center">
+						<Card.Img className="w-100" variant="top" src={image} />
+				</Card>
+			</Col>
 
-				<Card.Img className="w-25" variant="top" src={image} />
-				<Card.Body>
-					<Card.Text><h5> { description } </h5></Card.Text>
-					<h4>Price:  <span>&#8369;</span>{ price } </h4>
+			<Col xs={12} md={8}>
+				<Card className="">
+					<Card.Header>
+						<h2 className="p-4 w-100"  variant="warning" style={{fontWeight: 'bold'}}>{` ${name}  ☕`}</h2>
+					</Card.Header>
+					<Card.Body>
+						<Card.Text><h5> { description } </h5>
+						</Card.Text> <h4>Price: <span>&#8369;</span>{ price } </h4>
+					</Card.Body>
 
-				</Card.Body>
+					<Card.Footer>
+					{ user.accessToken !== null ?
+						<>
+						<Button variant="dark" onClick={decrementQuantity}> - </Button>
+								 <span> {` ${quantity} `} </span>
+						<Button variant="dark" onClick={incrementQuantity}> + </Button> 
+							<h4>Subtotal: <span>&#8369;</span>{subTotal} </h4>
+						<Button className="text-danger mx-2" style={{fontWeight: 'bold'}} variant="warning" as={Link} to="/products" > {<GrFormPreviousLink />} </Button>
+						<Button className="bg-dark text-warning mx-1" style={{fontWeight: 'bold'}} variant="dark" onClick={() => addToCart(productId, quantity, subTotal)}> Add to Cart </Button>
+						<Button className="bg-dark text-warning mx-1" style={{fontWeight: 'bold'}} variant="dark" as={ Link } to={`/mycart`}> View Cart</Button>
+						</>
+						:
+						<Button variant="dark" as={ Link } to="/login"><h4>Login to Purchase</h4></Button>
+					 }
+						
+					</Card.Footer>
+				</Card>
+			</Col>
 
-				<Card.Footer>
-				{ user.accessToken !== null ?
-					<>
-					<Button variant="dark" onClick={decrementQuantity}> - </Button>
-							 <span> {` ${quantity} `} </span>
-					<Button variant="dark" onClick={incrementQuantity}> + </Button> 
-						<h4>Subtotal: <span>&#8369;</span>{subTotal} </h4>
-					<Button className="text-danger mx-2" style={{fontWeight: 'bold'}} variant="warning" as={Link} to="/products" > {<GrFormPreviousLink />} </Button>
-					<Button className="bg-dark text-warning mx-1" style={{fontWeight: 'bold'}} variant="dark" onClick={() => addToCart(productId, quantity, subTotal)}> Add to Cart </Button>
-					<Button className="bg-dark text-warning mx-1" style={{fontWeight: 'bold'}} variant="dark" as={ Link } to={`/mycart`}> View Cart</Button>
-					</>
-					:
-					<Button variant="dark" as={ Link } to="/login"><h4>Login to Purchase</h4></Button>
-				 }
-					
-					
-				</Card.Footer>
-			</Card>
-		</Container>
+		</Row>
 
 		)
 }

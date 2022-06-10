@@ -13,7 +13,7 @@ export default function EditProduct({ specificProduct, fetchData }){
 	const [ showEdit, setShowEdit ] = useState(false)
 
 	const openEdit = (productId) => {
-		fetch(`http://localhost:4000/products/findproduct/${ productId }`)
+		fetch(`https://cup-po-chino.herokuapp.com/products/findproduct/${ productId }`)
 		.then(res => res.json())
 		.then(data => {
 			//populate all input values with the course information that we fetched
@@ -48,7 +48,7 @@ export default function EditProduct({ specificProduct, fetchData }){
 		formData.append('price', price)
 		formData.append('image', image)
 		console.log(formData)
-		fetch(`http://localhost:4000/products/editProduct/${ productId }`, {
+		fetch(`https://cup-po-chino.herokuapp.com/products/editProduct/${ productId }`, {
 			method: 'PUT',
 			headers: {
 				Authorization: `Bearer ${ localStorage.getItem('accessToken') }`

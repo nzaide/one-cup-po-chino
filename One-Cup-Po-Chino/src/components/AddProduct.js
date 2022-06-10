@@ -24,7 +24,7 @@ export default function AddProduct({fetchData}) {
 		formData.append('price', price)
 		formData.append('image', image)
 
-		fetch('http://localhost:4000/products/create', {
+		fetch('https://cup-po-chino.herokuapp.com/products/create', {
 			method: 'POST',
 			headers: {
 				Authorization: `Bearer ${ localStorage.getItem('accessToken') }`

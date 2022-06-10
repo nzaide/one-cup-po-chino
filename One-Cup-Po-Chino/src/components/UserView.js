@@ -21,7 +21,6 @@ export default function UserView({productsData}) {
 		setProducts(productsArr)
 	}, [productsData])
 
-
 	return(
 		<>
 			{ products }
