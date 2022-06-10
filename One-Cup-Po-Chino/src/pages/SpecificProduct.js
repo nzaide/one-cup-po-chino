@@ -19,6 +19,7 @@ export default function SpecificProduct() {
 	const [quantity, setQuantity] = useState(0);
 	const [subTotal, setSubTotal] = useState(0);
 	const [cart, setCart] = useState([]);
+	const [image, setImage] = useState('');
 
 	useEffect(() => {
 
@@ -28,6 +29,7 @@ export default function SpecificProduct() {
 			setName(data.name)
 			setDescription(data.description)
 			setPrice(data.price)
+			setImage(data.image)
 		})
 
 		setSubTotal(quantity * price)
@@ -104,11 +106,12 @@ export default function SpecificProduct() {
 
 	return(
 		<Container>
-			<Card>
+			<Card >
 				<Card.Header>
-					<h4 className="p-2"  variant="warning" style={{fontWeight: 'bold'}}>{ name }</h4>
+					<h2 className="p-2"  variant="warning" style={{fontWeight: 'bold'}}>{` ${name} ☕`}</h2>
 				</Card.Header>
 
+				<Card.Img className="w-25" variant="top" src={image} />
 				<Card.Body>
 					<Card.Text><h5> { description } </h5></Card.Text>
 					<h4>Price:  <span>&#8369;</span>{ price } </h4>

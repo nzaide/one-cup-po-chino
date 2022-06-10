@@ -2,17 +2,16 @@ import { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 
-export default function EditCourse({ specificProduct, fetchData }){
-
-	const [ showEdit, setShowEdit ] = useState(false)
+export default function EditProduct({ specificProduct, fetchData }){
 
 	const [productId, setProductId] = useState('');
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
 	const [price, setPrice] = useState(0);
+	const [image, setImage] = useState();
 
+	const [ showEdit, setShowEdit ] = useState(false)
 
-	//function openEdit to still get the data to the form while opening the modal
 	const openEdit = (productId) => {
 		fetch(`http://localhost:4000/products/findproduct/${ productId }`)
 		.then(res => res.json())
@@ -22,6 +21,7 @@ export default function EditCourse({ specificProduct, fetchData }){
 			setName(data.name)
 			setDescription(data.description)
 			setPrice(data.price)
+			setImage(data.image)
 		})
 
 		setShowEdit(true)
@@ -34,26 +34,30 @@ export default function EditCourse({ specificProduct, fetchData }){
 		setName('')
 		setDescription('')
 		setPrice(0)
+		setImage()
 	}
 
 	//a function to change or update the specific course
-	const editCourse = (e, productId) => {
+	const editProduct = (e, productId) => {
 		e.preventDefault();
 
+		let formData = new FormData()
+
+		formData.append('name', name)
+		formData.append('description', description)
+		formData.append('price', price)
+		formData.append('image', image)
+		console.log(formData)
 		fetch(`http://localhost:4000/products/editProduct/${ productId }`, {
 			method: 'PUT',
 			headers: {
-				'Content-Type': 'application/json',
 				Authorization: `Bearer ${ localStorage.getItem('accessToken') }`
 			},
-			body: JSON.stringify({
-				name: name,
-				description: description,
-				price: price
-			})
+			body: formData
 		})
 		.then(res => res.json())
 		.then(data => {
+			console.log(data)
 
 			if(data){
 				Swal.fire({
@@ -84,7 +88,7 @@ export default function EditCourse({ specificProduct, fetchData }){
 		{/*Edit Modal*/}
 
 			<Modal show={showEdit} onHide={closeEdit}>
-				<Form onSubmit={e => editCourse(e, productId)}>
+				<Form onSubmit={e => editProduct(e, productId)}>
 					<Modal.Header closeButton>
 						<Modal.Title>Edit Product</Modal.Title>
 					</Modal.Header>
@@ -115,6 +119,16 @@ export default function EditCourse({ specificProduct, fetchData }){
 							      onChange={e => setPrice(e.target.value)}
 							 />
 						</Form.Group>
+
+						<Form.Group controlId="formFile">
+							<Form.Label>Upload Image</Form.Label>
+							<Form.Control 
+							      type="file"
+							      required
+							      onChange={e => setImage(e.target.files[0])}
+							 />
+						</Form.Group>
+
 					</Modal.Body>
 
 					<Modal.Footer>

@@ -14,7 +14,8 @@ export default function ProductsPage() {
 		fetch('http://localhost:4000/products/allproducts')
 		.then(res => res.json())
 		.then(data => {
-			setAllProducts(data)
+				console.log(data)
+				setAllProducts(data)
 		})
 	}
 
