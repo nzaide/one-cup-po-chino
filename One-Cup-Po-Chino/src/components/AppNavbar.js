@@ -29,7 +29,7 @@ export default function AppNavbar() {
 
 
 	useEffect(() => {
-		fetch('https://cup-po-chino.herokuapp.com/users/details', {
+		fetch('http://localhost:4000/users/details', {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem('accessToken')}`
 			}

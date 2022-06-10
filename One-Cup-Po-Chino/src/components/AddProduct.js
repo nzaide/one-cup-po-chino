@@ -7,28 +7,30 @@ export default function AddProduct({fetchData}) {
 	const [ name, setName ] = useState('');
 	const [ description, setDescription ] = useState('');
 	const [ price, setPrice ] = useState(0);
+	const [image, setImage] = useState();
 
 	const [ showAdd, setShowAdd ] = useState(false);
 
 	const openAdd = () => setShowAdd(true);
-	const closeAdd = () => setShowAdd(false); 
+	const closeAdd = () => setShowAdd(false);
 
 	const addProduct = (e) => {
 		e.preventDefault();
 
-		fetch('https://cup-po-chino.herokuapp.com/products/create', {
+		let formData = new FormData()
+
+		formData.append('name', name)
+		formData.append('description', description)
+		formData.append('price', price)
+		formData.append('image', image)
+
+		fetch('http://localhost:4000/products/create', {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json',
 				Authorization: `Bearer ${ localStorage.getItem('accessToken') }`
 			},
-			body: JSON.stringify({
-				name: name,
-				description: description,
-				price: price
-			})
+			body: formData
 		})
-		.then(res => res.json())
 		.then(data => {
 
 			if(data){
@@ -98,6 +100,15 @@ export default function AddProduct({fetchData}) {
 							      required
 							      value={price}
 							      onChange={e => setPrice(e.target.value)}
+							 />
+						</Form.Group>
+
+						<Form.Group controlId="formFile">
+							<Form.Label>Upload Image</Form.Label>
+							<Form.Control 
+							      type="file"
+							      required
+							      onChange={e => setImage(e.target.files[0])}
 							 />
 						</Form.Group>
 					</Modal.Body>

@@ -9,19 +9,19 @@ export default function ProductCard({productProp}) {
 		productProp: PropTypes.shape({
 			name: PropTypes.string.isRequired,
 			description: PropTypes.string.isRequired,
-			price: PropTypes.number.isRequired
+			price: PropTypes.number.isRequired,
+			image: PropTypes.string.isRequired
 		})
 	}
 
-	const { _id, name, description, price } = productProp;
+	const { _id, name, description, price, image } = productProp;
 
 	return(
 		<Card className="m-2">
+			<Card.Img className="w-25" variant="top" src={image} />
+
 			<Card.Body>
 				<Card.Title className="bg-light text-dark" style={{fontWeight: 'bold'}}> { name } </Card.Title>
-
-				<Card.Subtitle>Description:</Card.Subtitle>
-				<Card.Text> { description } </Card.Text>
 
 				<Card.Subtitle>Price:</Card.Subtitle>
 				<Card.Text><span>&#8369;</span>  { price } </Card.Text>

@@ -118,7 +118,7 @@ export default function CartView() {
 							newOrder.push(cartItem)
 							
 						}
-							fetch('https://cup-po-chino.herokuapp.com/orders/createorder', {
+							fetch('http://localhost:4000/orders/createorder', {
 							method: 'POST',
 							headers: {
 								'Content-Type': 'application/json',

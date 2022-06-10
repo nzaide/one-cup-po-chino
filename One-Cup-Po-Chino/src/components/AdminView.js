@@ -20,6 +20,12 @@ export default function AdminView(props) {
 			return(
 				<tr key={product._id}>
 					<td colspan="2" className="bg-light text-success" style={{fontWeight: 'bold'}}><AiOutlineFieldNumber /> {product._id}</td>
+					<td>
+						<img 
+						src={product.image}
+						width="200px"
+						/>
+					</td>
 					<td className="bg-light text-dark"><GiCoffeeBeans /> {product.name}</td>
 					<td>{product.description}</td>
 					<td className="bg-light text-danger" style={{fontWeight: 'bold'}}><span>&#8369;</span>{product.price}</td>
@@ -53,12 +59,13 @@ export default function AdminView(props) {
 			<Table striped bordered hover responsive>
 				<thead className="bg-dark text-warning">
 					<tr>
-						<th colspan="2">ID</th>
+						<th colSpan="2">ID</th>
+						<th>IMAGE</th>
 						<th>NAME</th>
 						<th>DESCRIPTION</th>
 						<th>PRICE</th>
 						<th>AVAILABILITY</th>
-						<th Colspan="2">ACTIONS</th>
+						<th colSpan="2">ACTIONS</th>
 					</tr>
 				</thead>
 

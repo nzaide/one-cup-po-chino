@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 export default function ProductStatus({ specificProductStatus, isActive, fetchData}) {
 
 	const archiveToggle = (productId) => {
-		fetch(`https://cup-po-chino.herokuapp.com/products/archive/${ productId }`,{
+		fetch(`http://localhost:4000/products/archive/${ productId }`,{
 			method: 'PUT',
 			headers: {
 				Authorization: `Bearer ${ localStorage.getItem('accessToken')}`
@@ -37,7 +37,7 @@ export default function ProductStatus({ specificProductStatus, isActive, fetchDa
 	//for activating the product
 	const activateToggle = (productId) => {
 		console.log(productId)
-		fetch(`https://cup-po-chino.herokuapp.com/products/activate/${ productId }`, {
+		fetch(`http://localhost:4000/products/activate/${ productId }`, {
 			method: 'PUT',
 			headers: {
 				Authorization: `Bearer ${ localStorage.getItem('accessToken')}`

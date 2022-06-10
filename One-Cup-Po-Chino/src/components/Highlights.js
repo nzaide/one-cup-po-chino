@@ -7,11 +7,11 @@ export default function Highlights(){
 	return(
 
 		<Row>
-			<Col xs={12} md={3}>
+			<Col xs={12} md={4}>
 				<Card className="cardHighlight p-3">
 					<Card.Body>
 						<Card.Title>
-							<h2>{`𝗛𝗼𝘂𝘀𝗲 𝗕𝗹𝗲𝗻𝗱☕`}</h2>
+							<h2>{`𝗛𝗼𝘂𝘀𝗲 𝗕𝗹𝗲𝗻𝗱 ☕`}</h2>
 						</Card.Title>
 
 						<Card.Text>
@@ -21,11 +21,11 @@ export default function Highlights(){
 				</Card>
 			</Col>
 
-			<Col xs={12} md={3}>
+			<Col xs={12} md={4}>
 				<Card className="cardHighlight p-3">
 					<Card.Body>
 						<Card.Title>
-							<h2>{ `𝗖𝗮𝗳𝗲́ 𝗠𝗼𝗰𝗵𝗮𝗰𝗵𝗶𝗻𝗼 ☕`}</h2>
+							<h2>{ `𝗖𝗮𝗳𝗲 𝗠𝗼𝗰𝗵𝗮𝗰𝗵𝗶𝗻𝗼 ☕`}</h2>
 						</Card.Title>
 
 						<Card.Text>

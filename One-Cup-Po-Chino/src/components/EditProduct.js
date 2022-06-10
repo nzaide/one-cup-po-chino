@@ -14,7 +14,7 @@ export default function EditCourse({ specificProduct, fetchData }){
 
 	//function openEdit to still get the data to the form while opening the modal
 	const openEdit = (productId) => {
-		fetch(`https://cup-po-chino.herokuapp.com/products/findproduct/${ productId }`)
+		fetch(`http://localhost:4000/products/findproduct/${ productId }`)
 		.then(res => res.json())
 		.then(data => {
 			//populate all input values with the course information that we fetched
@@ -40,7 +40,7 @@ export default function EditCourse({ specificProduct, fetchData }){
 	const editCourse = (e, productId) => {
 		e.preventDefault();
 
-		fetch(`https://cup-po-chino.herokuapp.com/products/editProduct/${ productId }`, {
+		fetch(`http://localhost:4000/products/editProduct/${ productId }`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',

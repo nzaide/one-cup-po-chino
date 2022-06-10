@@ -22,7 +22,7 @@ export default function SpecificProduct() {
 
 	useEffect(() => {
 
-		fetch(`https://cup-po-chino.herokuapp.com/products/findproduct/${ productId }`)
+		fetch(`http://localhost:4000/products/findproduct/${ productId }`)
 		.then(res => res.json())
 		.then(data => {
 			setName(data.name)

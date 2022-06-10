@@ -28,7 +28,7 @@ export default function Login() {
 	function authentication(e) {
 		e.preventDefault();
 
-		fetch('https://cup-po-chino.herokuapp.com/users/login', {
+		fetch('http://localhost:4000/users/login', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
@@ -45,7 +45,7 @@ export default function Login() {
 				})
 
 				//get user's details from our token
-				fetch('https://cup-po-chino.herokuapp.com/users/details', {
+				fetch('http://localhost:4000/users/details', {
 					headers: {
 						Authorization: `Bearer ${data.accessToken}`
 					}

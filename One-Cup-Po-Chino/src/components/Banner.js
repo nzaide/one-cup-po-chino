@@ -14,7 +14,7 @@ export default function Banner(props) {
 	const [name, setName] = useState('');
 
 	useEffect(() => {
-		fetch('https://cup-po-chino.herokuapp.com/users/details', {
+		fetch('http://localhost:4000/users/details', {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem('accessToken')}`
 			}
