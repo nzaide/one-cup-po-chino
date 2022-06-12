@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
+import { Col, Row } from 'react-bootstrap';
 
 export default function UserView({productsData}) {
 
@@ -10,7 +11,9 @@ export default function UserView({productsData}) {
 		const productsArr = productsData.map(product => {
 			if(product.isActive === true) {
 				return(
-					<ProductCard key={product._id} productProp={product}/>
+					<Col xs={12} md={3} className="">
+						<ProductCard key={product._id} productProp={product}/>
+					</Col>
 					)
 			}else {
 				return null;
@@ -22,8 +25,8 @@ export default function UserView({productsData}) {
 	}, [productsData])
 
 	return(
-		<>
+		<Row>
 			{ products }
-		</>
+		</Row>
 		)
 }

@@ -17,9 +17,7 @@ export default function ProductCard({productProp}) {
 	const { _id, name, description, price, image } = productProp;
 
 	return(
-		<Row>
-			<Col xs={12} md={4}>
-				<Card className="m-2">
+				<Card className="m-2" style={{height: "38rem"}}>
 				<Card.Img className="w-100" variant="top" src={image} />
 
 				<Card.Body>
@@ -31,8 +29,6 @@ export default function ProductCard({productProp}) {
 					<Button variant="warning" className="bg-dark text-warning" style={{fontWeight: 'bold'}} as={ Link } to={`/products/findproduct/${_id}`}>See More</Button>
 				</Card.Body>
 			</Card>
-			</Col>
-		</Row>
 		)
 }
 

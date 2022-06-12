@@ -23,6 +23,7 @@ export default function AddProduct({fetchData}) {
 		formData.append('description', description)
 		formData.append('price', price)
 		formData.append('image', image)
+		console.log(formData)
 
 		fetch('https://cup-po-chino.herokuapp.com/products/create', {
 			method: 'POST',
@@ -32,7 +33,7 @@ export default function AddProduct({fetchData}) {
 			body: formData
 		})
 		.then(data => {
-
+		console.log(data)
 			if(data){
 				Swal.fire({
 					title: 'Success',

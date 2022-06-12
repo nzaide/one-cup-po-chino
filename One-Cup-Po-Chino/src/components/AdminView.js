@@ -19,7 +19,7 @@ export default function AdminView(props) {
 		const productsArr = productsData.map(product => {
 			return(
 				<tr key={product._id}>
-					<td colspan="2" className="bg-light text-success" style={{fontWeight: 'bold'}}><AiOutlineFieldNumber /> {product._id}</td>
+					<td colSpan="2" className="bg-light text-success" style={{fontWeight: 'bold'}}><AiOutlineFieldNumber /> {product._id}</td>
 					<td>
 						<img 
 						src={product.image}
