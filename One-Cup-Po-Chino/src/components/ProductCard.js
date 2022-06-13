@@ -31,20 +31,6 @@ export default function ProductCard({productProp}) {
 					<Button variant="warning" className="bg-dark text-warning" style={{fontWeight: 'bold'}} as={ Link } to={`/products/findproduct/${_id}`}>Buy Now</Button>
 				</Card.Body>
 			</Card>
-
-
-			<Card className="m-2 border-warning" style={{height: "34rem"}}>
-				<Card.Img className="img-fluid p-2" variant="top" src={image} />
-
-				<Card.Body className="">
-					<Card.Title className="bg-warning text-dark" style={{fontWeight: 'bold'}}> { name } </Card.Title>
-
-					<Card.Subtitle>Price:</Card.Subtitle>
-					<Card.Text><span>&#8369;</span>  { price } </Card.Text>
-
-					<Button variant="warning" className="bg-dark text-warning" style={{fontWeight: 'bold'}} as={ Link } to={`/products/findproduct/${_id}`}>Buy Now</Button>
-				</Card.Body>
-			</Card>
 		</>
 		)
 }
